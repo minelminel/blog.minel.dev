@@ -8,9 +8,16 @@
 import * as React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import { defineCustomElements as deckDeckGoHighlightElement } from "@deckdeckgo/highlight-code/dist/loader";
+import { ThemeProvider } from '@primer/components'
 
 import Header from "./header"
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./layout.css"
+
+/* syntax highlighting for markdown code blocks */
+deckDeckGoHighlightElement();
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -25,6 +32,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
+    <ThemeProvider colorMode="night" nightScheme="dark">
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       <div
         style={{
@@ -39,11 +47,10 @@ const Layout = ({ children }) => {
             marginTop: `2rem`,
           }}
         >
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
+          © {new Date().getFullYear()}
         </footer>
       </div>
+      </ThemeProvider>
     </>
   )
 }
