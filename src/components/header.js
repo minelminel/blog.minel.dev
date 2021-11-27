@@ -5,20 +5,42 @@ import { Link } from "gatsby"
 import { Header as PrimerHeader, TextInput } from '@primer/components'
 import { SearchIcon } from "@primer/octicons-react"
 
-const Header = ({ siteTitle }) => (
-  <div style={{ backgroundColor: "#161b22"}}>
-  <PrimerHeader style={{ margin: `0 auto`, maxWidth: 960 }}>
-    <PrimerHeader.Item>
-      <PrimerHeader.Link href="#" fontSize={4}>
-        <code>{ siteTitle }</code>
-      </PrimerHeader.Link>
-    </PrimerHeader.Item>
-    <PrimerHeader.Item full></PrimerHeader.Item>
-    <PrimerHeader.Item mr={0}>
-      <TextInput type="search" icon={SearchIcon} />
-    </PrimerHeader.Item>
-  </PrimerHeader>
-  </div>
+const Header = ({ siteTitle }) => {
+  const [query, setQuery] = React.useState(``)
+
+  const handleInput = (event) => {
+    setQuery(event.target.value)
+  }
+
+  const handleEnter = (event) => {
+    if(event.key === `Enter`) {
+      const url = new URL(window.location.href)
+      const params = new URLSearchParams({
+        q: query
+      })
+      console.log(url)
+      url.pathname = `/search`
+      url.search = `?${params.toString()}`
+      window.location.href = url.toString()
+    }
+  }
+
+  return (
+    <div style={{ backgroundColor: "#161b22"}}>
+    <PrimerHeader style={{ margin: `0 auto`, maxWidth: 960 }}>
+      <PrimerHeader.Item>
+        <PrimerHeader.Link href="/" fontSize={4}>
+          <code>{ siteTitle }</code>
+        </PrimerHeader.Link>
+      </PrimerHeader.Item>
+      <PrimerHeader.Item full></PrimerHeader.Item>
+      <PrimerHeader.Item mr={0}>
+        <TextInput default={query} type="search" icon={SearchIcon} onInput={handleInput} onKeyDown={handleEnter} />
+      </PrimerHeader.Item>
+    </PrimerHeader>
+    </div>
+  )
+}
 
   // <header
   //   style={{
@@ -47,7 +69,6 @@ const Header = ({ siteTitle }) => (
   //     </h1>
   //   </div>
   // </header>
-)
 
 Header.propTypes = {
   siteTitle: PropTypes.string,

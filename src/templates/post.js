@@ -40,7 +40,6 @@ const Template = ({ data, pageContext }) => {
   return (
     <Layout>
       <Seo title={post.frontmatter.title}/>
-      <Link to={`/`}>Go Back</Link>
       <hr/>
       <p>{post.path}</p>
       <h1>{post.frontmatter.title}</h1>

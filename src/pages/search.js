@@ -1,20 +1,49 @@
 import * as React from 'react'
 import { Link, graphql } from 'gatsby'
 import { useFlexSearch } from 'react-use-flexsearch'
+import Card  from 'react-bootstrap/Card'
+import { Button } from '@primer/components'
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+
+const Result = ({title, author, date, path}) => {
+  return (<Card style={{ width: '18rem' }}>
+  <Card.Img variant="top" src="holder.js/100px180" />
+  <Card.Body>
+    <Card.Title>{title}</Card.Title>
+    <Card.Text>
+      Some quick example text to build on the card title and make up the bulk of
+      the card's content.
+    </Card.Text>
+    <Button as={`a`} href={path} variant="primary">Read More</Button>
+  </Card.Body>
+</Card>)
+}
 
 const SearchPage = ({ data }) => {
   const { index, store } = data.localSearchPages
   const [query, setQuery] = React.useState(``)
   const results = useFlexSearch(query, index, store)
 
+  React.useEffect(() => {
+    const url = new URL(window.location.href)
+    const q = url.searchParams.get(`q`)
+    if(q) {
+      setQuery(q)
+    }
+  }, [])
+
   const handleInput = (event) => {
     setQuery(event.target.value)
     /* TODO: load/set url params to leverage browser history */
     // const params = new URLSearchParams({ query: event.target.value })
     // window.location.search = `?${params.toString()}`
+    console.log(event.target.value)
+  }
+
+  const nullish = (string) => {
+    return string.trim().length === 0
   }
 
   return (
@@ -25,15 +54,11 @@ const SearchPage = ({ data }) => {
       <h4>Start typing to view results...</h4>
       <input value={query} onChange={handleInput} type="text"/>
       {
-        results.length === 0 && <div>no results!</div>
+        nullish(query) ? null : results.length === 0 ? <div>No Results</div> : null
       }
       {
         results.map(result => (
-          <div key={result.id}>
-            <h4>{result.title}</h4>
-            <small>Posted by {result.author} on {result.date}</small>
-            <Link to={result.path}>Read More</Link>
-          </div>
+          <Result key={result.id} title={result.title} author={result.author} date={result.date} path={result.path} />
         ))
       }
     </div>
