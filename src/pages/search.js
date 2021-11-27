@@ -1,70 +1,79 @@
-import * as React from 'react'
-import { Link, graphql } from 'gatsby'
-import { useFlexSearch } from 'react-use-flexsearch'
-import Card  from 'react-bootstrap/Card'
-import { Button } from '@primer/components'
+import * as React from 'react';
+import { Link, graphql } from 'gatsby';
+import { useFlexSearch } from 'react-use-flexsearch';
+import Card from 'react-bootstrap/Card';
+import { Button, TextInput } from '@primer/components';
 
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+import Layout from '../components/layout';
+import Seo from '../components/seo';
 
-const Result = ({title, author, date, path}) => {
-  return (<Card style={{ width: '18rem' }}>
-  <Card.Img variant="top" src="holder.js/100px180" />
-  <Card.Body>
-    <Card.Title>{title}</Card.Title>
-    <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
-    </Card.Text>
-    <Button as={`a`} href={path} variant="primary">Read More</Button>
-  </Card.Body>
-</Card>)
-}
+const Result = ({ title, author, date, path }) => {
+  return (
+    <Card style={{ width: '18rem' }} className="mt-1 mb-1">
+      {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+      <Card.Body>
+        <Card.Title>{title}</Card.Title>
+        <Card.Subtitle className="mb-2 text-muted">{`Posted by ${author} on ${date}`}</Card.Subtitle>
+        {/* <Card.Text>
+      ipsum lorem
+    </Card.Text> */}
+        <Button as={`a`} href={path} variant="primary">
+          Read More
+        </Button>
+      </Card.Body>
+    </Card>
+  );
+};
 
 const SearchPage = ({ data }) => {
-  const { index, store } = data.localSearchPages
-  const [query, setQuery] = React.useState(``)
-  const results = useFlexSearch(query, index, store)
+  const { index, store } = data.localSearchPages;
+  const [query, setQuery] = React.useState(``);
+  const results = useFlexSearch(query, index, store);
 
   React.useEffect(() => {
-    const url = new URL(window.location.href)
-    const q = url.searchParams.get(`q`)
-    if(q) {
-      setQuery(q)
+    const url = new URL(window.location.href);
+    const q = url.searchParams.get(`q`);
+    if (q) {
+      setQuery(q);
     }
-  }, [])
+  }, []);
 
   const handleInput = (event) => {
-    setQuery(event.target.value)
+    setQuery(event.target.value);
     /* TODO: load/set url params to leverage browser history */
     // const params = new URLSearchParams({ query: event.target.value })
     // window.location.search = `?${params.toString()}`
-    console.log(event.target.value)
-  }
+    console.log(event.target.value);
+  };
 
   const nullish = (string) => {
-    return string.trim().length === 0
-  }
+    return string.trim().length === 0;
+  };
+
+  console.log(results);
 
   return (
     <Layout>
-      <Seo title="search"/>
-    <div>
-      <h1>Search</h1>
-      <h4>Start typing to view results...</h4>
-      <input value={query} onChange={handleInput} type="text"/>
-      {
-        nullish(query) ? null : results.length === 0 ? <div>No Results</div> : null
-      }
-      {
-        results.map(result => (
-          <Result key={result.id} title={result.title} author={result.author} date={result.date} path={result.path} />
-        ))
-      }
-    </div>
+      <Seo title="search" />
+      <div>
+        <h1>Search</h1>
+        <h4>Start typing to view results...</h4>
+        <TextInput value={query} onChange={handleInput} />
+        {results.length > 1
+          ? results.map((result) => (
+              <Result
+                key={result.id}
+                title={result.title}
+                author={result.author}
+                date={result.date}
+                path={result.path}
+              />
+            ))
+          : !nullish(query) && <div>No Results</div>}
+      </div>
     </Layout>
-  )
-}
+  );
+};
 
 export const searchQuery = graphql`
   query SearchPageQuery {
@@ -73,6 +82,6 @@ export const searchQuery = graphql`
       store
     }
   }
-`
+`;
 
 export default SearchPage;

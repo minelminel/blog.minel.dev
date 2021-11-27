@@ -24,9 +24,6 @@ body {
   background-color: var(--night);
   color: var(--light);
 }
-/* a {
-  font-family: monospace;
-} */
 article,
 aside,
 details,
@@ -602,4 +599,8 @@ pre tt:after {
   html {
     font-size: 100%;
   }
+}
+/* Bootstrap */
+.card {
+  background-color: var(--dark);
 }

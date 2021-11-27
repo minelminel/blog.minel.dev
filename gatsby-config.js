@@ -84,6 +84,8 @@ module.exports = {
                 frontmatter {
                   path
                   title
+                  author
+                  date
                 }
                 rawMarkdownBody
               }
@@ -103,7 +105,7 @@ module.exports = {
         // List of keys to store and make available in your UI. The values of
         // the keys are taken from the normalizer function below.
         // Default: all fields
-        store: ['id', 'path', 'title'],
+        // store: ['id', 'path', 'title'],
 
         // Function used to map the result from the GraphQL query. This should
         // return an array of items to index in the form of flat objects
@@ -115,6 +117,8 @@ module.exports = {
             path: node.frontmatter.path,
             title: node.frontmatter.title,
             body: node.rawMarkdownBody,
+            author: node.frontmatter.author,
+            date: node.frontmatter.date,
           })),
       },
     },
