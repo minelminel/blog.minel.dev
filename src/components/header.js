@@ -6,6 +6,7 @@ import { Header as PrimerHeader, TextInput } from '@primer/components'
 import { SearchIcon } from "@primer/octicons-react"
 
 const Header = ({ siteTitle }) => (
+  <div style={{ backgroundColor: "#161b22"}}>
   <PrimerHeader style={{ margin: `0 auto`, maxWidth: 960 }}>
     <PrimerHeader.Item>
       <PrimerHeader.Link href="#" fontSize={4}>
@@ -17,6 +18,7 @@ const Header = ({ siteTitle }) => (
       <TextInput type="search" icon={SearchIcon} />
     </PrimerHeader.Item>
   </PrimerHeader>
+  </div>
 
   // <header
   //   style={{
