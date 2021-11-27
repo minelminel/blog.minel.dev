@@ -1,3 +1,6 @@
+:root {
+  --night: #161b22;
+}
 html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -18,7 +21,12 @@ body {
   -ms-font-feature-settings: "kern", "liga", "clig", "calt";
   -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
   font-feature-settings: "kern", "liga", "clig", "calt";
+  background-color: var(--night);
+  color: var(--light);
 }
+/* a {
+  font-family: monospace;
+} */
 article,
 aside,
 details,

@@ -26,11 +26,11 @@ const Header = ({ siteTitle }) => {
   }
 
   return (
-    <div style={{ backgroundColor: "#161b22"}}>
+    <div style={{ backgroundColor: "var(--night)"}}>
     <PrimerHeader style={{ margin: `0 auto`, maxWidth: 960 }}>
       <PrimerHeader.Item>
         <PrimerHeader.Link href="/" fontSize={4}>
-          <code>{ siteTitle }</code>
+          <code style={{fontSize: `1.25rem`}}>{ siteTitle }</code>
         </PrimerHeader.Link>
       </PrimerHeader.Item>
       <PrimerHeader.Item full></PrimerHeader.Item>
