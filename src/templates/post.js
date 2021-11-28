@@ -40,8 +40,8 @@ const Template = ({ data, pageContext }) => {
       <Seo title={post.frontmatter.title} />
       <hr />
       <h1>{post.frontmatter.title}</h1>
-      <blockquote>{post.frontmatter.byline}</blockquote>
-      <h4>
+      <p className="lead">{post.frontmatter.byline}</p>
+      <h4 className="text-muted">
         Posted by {post.frontmatter.author} on {post.frontmatter.date}
       </h4>
       <div dangerouslySetInnerHTML={{ __html: post.html }} />

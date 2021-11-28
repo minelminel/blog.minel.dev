@@ -560,14 +560,6 @@ th {
   padding-top: 0.725rem;
   padding-bottom: calc(0.725rem - 1px);
 }
-th:first-child,
-td:first-child {
-  padding-left: 0;
-}
-th:last-child,
-td:last-child {
-  padding-right: 0;
-}
 tt,
 code {
   background-color: hsla(0, 0%, 0%, 0.04);
@@ -606,4 +598,13 @@ pre tt:after {
 }
 hr {
   background-color: var(--secondary);
+}
+table, th, td {
+  border: 1px solid var(--secondary);
+}
+.lead {
+  border-radius: 5px;
+  border: 1px solid var(--secondary);
+  padding: 0.5rem;
+  color: var(--secondary);
 }

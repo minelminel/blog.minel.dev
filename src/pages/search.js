@@ -38,9 +38,6 @@ const SearchPage = ({ data }) => {
 
   const handleInput = (event) => {
     setQuery(event.target.value);
-    /* TODO: load/set url params to leverage browser history */
-    // const params = new URLSearchParams({ query: event.target.value })
-    // window.location.search = `?${params.toString()}`
   };
 
   const nullish = (string) => {
