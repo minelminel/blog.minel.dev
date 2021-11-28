@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link, graphql } from 'gatsby';
+import { graphql } from 'gatsby';
 import { useFlexSearch } from 'react-use-flexsearch';
 import Card from 'react-bootstrap/Card';
 import { Button, TextInput } from '@primer/components';
@@ -7,16 +7,14 @@ import { Button, TextInput } from '@primer/components';
 import Layout from '../components/layout';
 import Seo from '../components/seo';
 
-const Result = ({ title, author, date, path }) => {
+const Result = ({ title, author, date, path, byline }) => {
   return (
     <Card style={{ width: '18rem' }} className="mt-1 mb-1">
       {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">{`Posted by ${author} on ${date}`}</Card.Subtitle>
-        {/* <Card.Text>
-      ipsum lorem
-    </Card.Text> */}
+        <Card.Text>{byline}</Card.Text>
         <Button as={`a`} href={path} variant="primary">
           Read More
         </Button>
@@ -43,14 +41,11 @@ const SearchPage = ({ data }) => {
     /* TODO: load/set url params to leverage browser history */
     // const params = new URLSearchParams({ query: event.target.value })
     // window.location.search = `?${params.toString()}`
-    console.log(event.target.value);
   };
 
   const nullish = (string) => {
     return string.trim().length === 0;
   };
-
-  console.log(results);
 
   return (
     <Layout>
@@ -67,6 +62,7 @@ const SearchPage = ({ data }) => {
                 author={result.author}
                 date={result.date}
                 path={result.path}
+                byline={result.byline}
               />
             ))
           : !nullish(query) && <div>No Results</div>}

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link, graphql } from 'gatsby';
+import { graphql } from 'gatsby';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -13,7 +13,7 @@ const Pagination = ({ previous, next }) => {
       <div
         style={{
           textAlign: 'center',
-          border: '2px solid var(--light)',
+          border: '1px solid var(--light)',
           borderRadius: '5px',
         }}
       >
@@ -39,8 +39,8 @@ const Template = ({ data, pageContext }) => {
     <Layout>
       <Seo title={post.frontmatter.title} />
       <hr />
-      <p>{post.path}</p>
       <h1>{post.frontmatter.title}</h1>
+      <blockquote>{post.frontmatter.byline}</blockquote>
       <h4>
         Posted by {post.frontmatter.author} on {post.frontmatter.date}
       </h4>
@@ -61,6 +61,7 @@ export const postQuery = graphql`
         title
         author
         date
+        byline
       }
     }
   }

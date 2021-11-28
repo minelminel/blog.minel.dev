@@ -32,7 +32,7 @@ const Header = ({ siteTitle }) => {
         <PrimerHeader.Item full></PrimerHeader.Item>
         <PrimerHeader.Item mr={0}>
           <TextInput
-            placeholder={`Start typing...`}
+            placeholder={``}
             default={query}
             type="search"
             icon={SearchIcon}

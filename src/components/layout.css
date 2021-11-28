@@ -604,3 +604,6 @@ pre tt:after {
 .card {
   background-color: var(--dark);
 }
+hr {
+  background-color: var(--secondary);
+}

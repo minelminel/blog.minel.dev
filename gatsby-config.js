@@ -28,7 +28,7 @@ module.exports = {
         // https://css-tricks.com/meta-theme-color-and-trickery/
         // theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/logo.png`,
       },
     },
     // additional plugins
@@ -36,9 +36,9 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/src/pages`,
-        name: `pages`
-      }
+        path: `${__dirname}/src/pages/posts`,
+        name: `pages`,
+      },
     },
     {
       resolve: `gatsby-transformer-remark`,
@@ -49,10 +49,10 @@ module.exports = {
             options: {
               terminal: `carbon`,
               theme: `material`,
-            }
-          }
-        ]
-      }
+            },
+          },
+        ],
+      },
     },
     // You can have multiple instances of this plugin to create indexes with
     // different names or engines. For example, multi-lingual sites could create
@@ -86,6 +86,7 @@ module.exports = {
                   title
                   author
                   date
+                  byline
                 }
                 rawMarkdownBody
               }
@@ -119,6 +120,7 @@ module.exports = {
             body: node.rawMarkdownBody,
             author: node.frontmatter.author,
             date: node.frontmatter.date,
+            byline: node.frontmatter.byline,
           })),
       },
     },
@@ -126,4 +128,4 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
-}
+};

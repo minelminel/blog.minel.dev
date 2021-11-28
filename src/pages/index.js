@@ -11,6 +11,7 @@ const IndexPage = ({ data }) => (
     {data.allMarkdownRemark.edges.map((post) => (
       <div key={post.node.id}>
         <h3>{post.node.frontmatter.title}</h3>
+        <blockquote>{post.node.frontmatter.byline}</blockquote>
         <small>
           Posted by {post.node.frontmatter.author} on{' '}
           {post.node.frontmatter.date}
@@ -37,6 +38,7 @@ export const pageQuery = graphql`
             path
             date
             author
+            byline
           }
           excerpt
         }
